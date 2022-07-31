@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_view_form_inherit" model="ir.ui.view">
+        <field name="name">Add original salesperson</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <field name="original_employee_id" attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}"
+                       options="{'no_create': True, 'no_create_edit':True,'no_quick_create':True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_sales_order_filter_origin_employee" model="ir.ui.view">
+        <field name="name">Add Origin Employee On Group</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <search string="Search Sales Order">
+                <field name="original_employee_id" string="Original Employee"/>
+
+                    <filter string="Original Employee" name="original_employee_id" domain="[]"
+                            context="{'group_by': 'original_employee_id'}"/>
+
+            </search>
+        </field>
+    </record>
+
+
+</odoo>

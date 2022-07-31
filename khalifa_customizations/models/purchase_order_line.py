@@ -14,7 +14,7 @@ class PurchaseOrderLine(models.Model):
     @api.depends('product_uom_qty', 'discount', 'price_unit', 'taxes_id')
     def _compute_amount(self):
         for line in self:
-            price_before_discount= line.product_uom_qty * line.price_unit
+            price_before_discount = line.product_uom_qty * line.price_unit
             discount_amount = (price_before_discount * line.discount) / 100.0
             price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
             
