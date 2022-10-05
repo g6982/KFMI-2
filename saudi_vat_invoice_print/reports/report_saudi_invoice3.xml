@@ -246,13 +246,18 @@
                 <t t-call="saudi_vat_invoice_print.external_layout_vat">
                     <div class="page" style="font-family:'Cairo'n; font-size: 13px; !important">
                         <center>
-                            <h3>
-                                <!--                                <span t-if="doc.state in ['open','paid']">-->
+                            <h3 t-if="doc.move_type in ['out_invoice', 'in_invoice']">
                                 <span>
                                     <h4>VAT INVOICE فاتورة ضريبة</h4>
                                 </span>
                             </h3>
+                            <h3 t-if="doc.move_type in ['in_refund', 'out_refund']">
+                                <span>
+                                    <h4>Credit Note / إشعار دائن </h4>
+                                </span>
+                            </h3>
                         </center>
+
 
                         <!--                        <div style="100%">-->
                         <div class="row" style="border: 1px solid black;  margin-right:1px; margin-left:1px;">
