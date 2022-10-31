@@ -1,0 +1,53 @@
+<odoo>
+    <data>
+      <record id="mrp_extension" model="ir.ui.view">
+            <field name="name">Mrp.extension</field>
+            <field name="model">mrp.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='company_id']" position='after'>
+                     <field name="allowed_user" options="{'no_create': True,'no_open':True}" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="mrp_workorder_extenstion" model="ir.ui.view">
+            <field name="name">Mrp.workorder.Extension</field>
+            <field name="model">mrp.workorder</field>
+            <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//page[@name='time_tracking']//form//field[@name='user_id']" position='before'>
+                     <field name="employee_id"/>
+                </xpath>
+                <xpath expr="//page[@name='time_tracking']//tree//field[@name='user_id']" position='before'>
+                     <field name="employee_id"/>
+                </xpath>
+                <xpath expr="//page[@name='time_tracking']" position='after'>
+                        <page name="part_quantities" string="Parts Quantities">
+                            <field name="part_quantities_line">
+                                <tree editable="bottom">
+                                    <field name="part_qty_date"/>
+                                    <field name="finished_qty" context="{'is_calculated': 1}"/>
+                                    <field name="machine_name"/>
+                                    <field name="balanced_qty" readonly="1" force_save="1"/>
+                                    <field name="part_qty_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="workcenter_line_pivot_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.work.order.pivot</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.workcenter_line_pivot"/>
+        <field name="arch" type="xml">
+            <xpath expr="//pivot//field[@name='duration_expected']" position='after'>
+                <field name="work_balanced_qty"/>
+                <field name="work_finished_qty"/>
+                <field name="work_original_qty" string="Original Qty"/>
+            </xpath>
+        </field>
+    </record>
+    </data>
+</odoo>
