@@ -15,7 +15,7 @@
     'license': 'LGPL-3',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'purchase','l10n_in_purchase', 'l10n_in', 'base_vat'],
+    'depends': ['base', 'purchase'],
 
     # always loaded
     'data': [
