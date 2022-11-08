@@ -7,7 +7,7 @@
         <field name="priority" eval="8"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_term_id']" position="after">
-                <field name="original_employee_id" attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}"
+                <field name="original_employee_id" attrs="{'readonly': [('state', 'not in', ['draft', 'sent', 'sale'])]}"
                        options="{'no_create': True, 'no_create_edit':True,'no_quick_create':True}"/>
             </xpath>
         </field>
